@@ -8,5 +8,5 @@ public interface UserRepo extends JpaRepository<User,Integer> {
     public void deleteByEmail(String email);
     User findByEmail(String email);
 
-    boolean findByNicNo(String nic);
+    boolean existsByNicNo(String nic);
 }

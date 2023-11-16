@@ -25,12 +25,13 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserDto saveUser(UserDto dto) {
-        if(!userRepo.findByNicNo(dto.nicNo)){
+        if(!userRepo.existsByNicNo(dto.nicNo)) {
             User user = mapper.map(dto, User.class);
-           return mapper.map(userRepo.save(user),UserDto.class);
+            return mapper.map(userRepo.save(user), UserDto.class);
         }else {
-            throw new RuntimeException("User "+ dto.getEmail() +"Already Exist");
+            throw new RuntimeException("User "+ dto.getEmail() +" Not Found");
         }
+
 
     }
 
@@ -39,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserDto updateUser(UserDto dto) {
-      if(userRepo.findByNicNo(dto.nicNo)){
+      if(userRepo.existsByNicNo(dto.nicNo)){
           User user = mapper.map(dto, User.class);
           return mapper.map(userRepo.save(user),UserDto.class);
       }else {
