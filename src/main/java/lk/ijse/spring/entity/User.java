@@ -12,16 +12,13 @@ import javax.persistence.*;
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int userId;
-    public String userName ;
-
-    @Column(unique = true)
     public String email;
-    public String password;
-
     @Column(unique = true)
     public String nicNo;
+    @Column(unique = true)
+    public String userId;
+    public String userName;
+    public String password;
     public String contact;
     public String address;
     public String gender;

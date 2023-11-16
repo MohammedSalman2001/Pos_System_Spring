@@ -1,24 +1,21 @@
-package lk.ijse.spring.dto;
+package lk.ijse.spring.dto.res;
 
-import lombok.*;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
-public class UserDto {
+public class ResponseUserDto {
     public String userName ;
     public String email;
     public String password;
+
     public String nicNo;
     public String contact;
     public String address;
     public String gender;
-
 }
