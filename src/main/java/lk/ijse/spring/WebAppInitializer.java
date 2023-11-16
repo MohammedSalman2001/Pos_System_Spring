@@ -1,4 +1,4 @@
 package lk.ijse.spring;
 
-public class WebAppInitializer {
+public class WebAppInitializer  {
 }
