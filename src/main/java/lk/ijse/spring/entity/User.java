@@ -2,10 +2,7 @@ package lk.ijse.spring.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,8 +15,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int userId;
     public String userName ;
+
+    @Column(unique = true)
     public String email;
     public String password;
+
+    @Column(unique = true)
     public String nicNo;
     public String contact;
     public String address;
