@@ -1,15 +1,14 @@
 package lk.ijse.spring.dto.core;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@ToString
+
 public class OrderDetailsDto {
 
     private  String oid;

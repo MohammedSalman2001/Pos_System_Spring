@@ -1,6 +1,9 @@
 package lk.ijse.spring.service.impl;
 
+import lk.ijse.spring.dto.core.OrderDetailsDto;
 import lk.ijse.spring.dto.core.OrderDto;
+import lk.ijse.spring.dto.queryInterfaces.OrderDetailsInterface;
+import lk.ijse.spring.dto.res.ResponseOrderDetailsDto;
 import lk.ijse.spring.entity.Item;
 import lk.ijse.spring.entity.OrderDetails;
 import lk.ijse.spring.entity.Orders;
@@ -9,9 +12,12 @@ import lk.ijse.spring.repo.OrderDetailsRepo;
 import lk.ijse.spring.repo.PlaceOrderRepo;
 import lk.ijse.spring.service.PlaceOrderService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -46,9 +52,11 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
                     throw new RuntimeException("Item Qty Not found");
                 }
             }
-            placeOrderRepo.save(order);
+            Orders save = placeOrderRepo.save(order);
 
-            if (dto.getOrderDetails().size()<1)throw new RuntimeException("No item added");
+
+
+            if (dto.getOrderDetailsDto().size()<1)throw new RuntimeException("No item added");
 
             for(OrderDetails details:order.getOrderDetails()){
                 Item item = itemRepo.findById(details.getItem().getCode()).get();
@@ -56,9 +64,44 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
                 itemRepo.save(item);
             }
 
+
         }else {
             throw  new RuntimeException("Duplicate Id: "+ dto.getOId());
         }
+
         return null;
+
+    }
+
+    public OrderDto find(String id) {
+        Orders orders = placeOrderRepo.findById(id).get();
+        OrderDto map = mapper.map(orders, OrderDto.class);
+        return map;
+    }
+
+    public List<OrderDto> findAll() {
+        List<Orders> all = placeOrderRepo.findAll();
+        ArrayList<OrderDto> orderDtos = new ArrayList<OrderDto>();
+
+        List<OrderDetailsDto> orderDetailsDtos=new ArrayList<OrderDetailsDto>();
+
+
+        ;
+        for(Orders orders:all){
+            orderDtos.add(new OrderDto(
+                    orders.getOid(),
+                    orders.getDate(),
+                    orders.getCustomer()
+            ));
+        }
+        return orderDtos;
+
+    }
+
+    public List<ResponseOrderDetailsDto> getAllOrdersDetails() {
+        List<OrderDetailsInterface> responseOrderDetailsDtos=placeOrderRepo.getAllOrderDetails();
+
+     return mapper.map(responseOrderDetailsDtos,new TypeToken<List<ResponseOrderDetailsDto>>(){}.getType());
+
     }
 }

@@ -21,7 +21,7 @@ public class Orders {
     @JoinColumn(name = "customerId",referencedColumnName = "id",nullable = false)
     private Customer customer;
 
-    @OneToMany(mappedBy = "orders",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "orders",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<OrderDetails> orderDetails;
 
 

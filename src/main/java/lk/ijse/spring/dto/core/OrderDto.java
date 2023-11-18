@@ -12,11 +12,16 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@ToString
 public class OrderDto {
 
     private  String oId;
     private String date;
     private Customer customer;
-    private List<OrderDetailsDto> orderDetails;
+    private List<OrderDetailsDto> orderDetailsDto;
+
+    public OrderDto(String oId, String date, Customer customer) {
+        this.oId = oId;
+        this.date = date;
+        this.customer = customer;
+    }
 }
