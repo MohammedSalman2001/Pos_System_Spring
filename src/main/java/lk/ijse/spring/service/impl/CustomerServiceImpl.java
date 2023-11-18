@@ -2,6 +2,7 @@ package lk.ijse.spring.service.impl;
 
 
 import lk.ijse.spring.dto.core.CustomerDto;
+import lk.ijse.spring.dto.req.RequestCustomerDto;
 import lk.ijse.spring.dto.res.ResponseCustomerDto;
 import lk.ijse.spring.entity.Customer;
 import lk.ijse.spring.repo.CustomerRepo;
@@ -33,11 +34,9 @@ public class CustomerServiceImpl implements CustomerService {
         this.generator = generator;
     }
 
-    public ResponseCustomerDto saveCustomer(ResponseCustomerDto rspDto) {
 
-        String customerId = generator.generateKey("Cus");
-        CustomerDto dto = mapper.map(rspDto, CustomerDto.class);
-        dto.setId(customerId);
+    public ResponseCustomerDto saveCustomer(RequestCustomerDto requestCustomerDto) {
+        CustomerDto dto = mapper.map(requestCustomerDto, CustomerDto.class);
         if (!customerRepo.existsById(dto.getId())) {
             Customer customer = mapper.map(dto, Customer.class);
             return mapper.map(customerRepo.save(customer), ResponseCustomerDto.class);
@@ -55,16 +54,17 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
-    public ResponseCustomerDto updateCustomer(ResponseCustomerDto dto) {
-
-        CustomerDto customerDto= mapper.map(dto, CustomerDto.class);
+    public ResponseCustomerDto updateCustomer(RequestCustomerDto requestCustomerDto) {
+        CustomerDto customerDto= mapper.map(requestCustomerDto, CustomerDto.class);
         if (customerRepo.existsById(customerDto.getId())) {
-            Customer customer = mapper.map(dto, Customer.class);
+            Customer customer = mapper.map(customerDto, Customer.class);
             return mapper.map(customerRepo.save(customer), ResponseCustomerDto.class);
         }else {
-            throw new RuntimeException("customer" + dto.getId()+ " Not found..!");
+            throw new RuntimeException("customer" + customerDto.getId()+ " Not found..!");
         }
     }
+
+
 
     public ResponseCustomerDto searchCustomer(String id) {
         if(customerRepo.existsById(id)) {

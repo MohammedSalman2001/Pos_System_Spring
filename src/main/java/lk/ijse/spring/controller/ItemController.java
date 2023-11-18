@@ -39,9 +39,9 @@ public class ItemController {
         );
     }
 
-    @DeleteMapping(params = {"id"})
-    public ResponseEntity<StandResponse> delete(@RequestParam String id){
-        itemService.delete(id);
+    @DeleteMapping(params = {"code"})
+    public ResponseEntity<StandResponse> delete(@RequestParam String code){
+        itemService.delete(code);
         return new ResponseEntity<StandResponse>(
                 new StandResponse(200,"deleted",null), HttpStatus.CREATED
         );

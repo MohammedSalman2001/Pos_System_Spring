@@ -12,6 +12,7 @@ import javax.persistence.NamedEntityGraph;
 @Data
 public class RequestCustomerDto {
 
+    private String id;
     private String name;
     private String address;
     private double salary;

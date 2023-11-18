@@ -2,6 +2,8 @@ package lk.ijse.spring.controller;
 
 
 import lk.ijse.spring.dto.core.CustomerDto;
+import lk.ijse.spring.dto.req.RequestCustomerDto;
+import lk.ijse.spring.dto.res.ResponseCustomerDto;
 import lk.ijse.spring.service.CustomerService;
 import lk.ijse.spring.util.StandResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +26,18 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<StandResponse> save(@ModelAttribute CustomerDto dto){
+    public ResponseEntity<StandResponse> save(@ModelAttribute RequestCustomerDto dto){
       /*  System.out.println(dto.toString());
         System.out.println("save customer");*/
-        CustomerDto customerDto = customerService.saveCustomer(dto);
+        ResponseCustomerDto customerDto = customerService.saveCustomer(dto);
         return new ResponseEntity<StandResponse>(
                 new StandResponse(200,"saved",customerDto), HttpStatus.CREATED
         );
     }
 
     @PutMapping
-    public ResponseEntity<StandResponse> update(@RequestBody CustomerDto dto){
-        CustomerDto customerDto = customerService.updateCustomer(dto);
+    public ResponseEntity<StandResponse> update(@RequestBody RequestCustomerDto dto){
+        ResponseCustomerDto customerDto = customerService.updateCustomer(dto);
         return new ResponseEntity<StandResponse>(
                 new StandResponse(200,"saved",customerDto), HttpStatus.CREATED
         );
@@ -51,7 +53,7 @@ public class CustomerController {
 
     @GetMapping(path = "list")
     public ResponseEntity<StandResponse> getAll(){
-        List<CustomerDto> allCustomer = customerService.getAllCustomer();
+        List<ResponseCustomerDto> allCustomer = customerService.getAllCustomer();
         return new ResponseEntity<StandResponse>(
                 new StandResponse(200,"saved",allCustomer), HttpStatus.CREATED
         );
@@ -59,7 +61,7 @@ public class CustomerController {
 
     @GetMapping(path = "{searchId}")
     public ResponseEntity<StandResponse> get(@PathVariable("searchId") String id){
-        CustomerDto customerDto = customerService.searchCustomer(id);
+        ResponseCustomerDto customerDto = customerService.searchCustomer(id);
         return new ResponseEntity<StandResponse>(
                 new StandResponse(200,"searchId",customerDto), HttpStatus.CREATED
         );
