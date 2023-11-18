@@ -1,19 +1,15 @@
 package lk.ijse.spring.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 
 @Entity
 public class Item {
@@ -23,8 +19,5 @@ public class Item {
     private int qtyOnHand;
     private double unitePrice;
 
-
-    @OneToMany(mappedBy = "item")
-    private List<OrderDetails> orderDetails;
 
 }

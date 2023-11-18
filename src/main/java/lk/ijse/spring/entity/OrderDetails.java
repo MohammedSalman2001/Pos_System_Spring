@@ -8,26 +8,27 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @Entity
-
+@IdClass(OrderItem_PK.class)
 public class OrderDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int orderDetailsId;
+    private  String oid;
+
+    @Id
+    private String itemCode;
+
+    private int qty;
+
+    private double unitePrice;
+
+    @ManyToOne
+    @JoinColumn(name = "oid",referencedColumnName = "oid",insertable = false,updatable = false)
+    private  Orders orders;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Order_Id")
-    private Orders orders;
-
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "item_code")
+    @ManyToOne
+    @JoinColumn(name = "itemCode",referencedColumnName = "code",insertable = false,updatable = false)
     private Item item;
-
-    private int qtyOnHand;
-
-    private double total;
-
 }
