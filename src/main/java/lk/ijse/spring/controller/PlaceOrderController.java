@@ -53,15 +53,13 @@ public class PlaceOrderController {
         List<OrderDto> all = placeOrderService.findAll();
         System.out.println(all);
         return new ResponseEntity<StandResponse>(
-                new StandResponse(200,"save Order",all), HttpStatus.CREATED
+                new StandResponse(200,"find All",all), HttpStatus.CREATED
         );
     }
 
     @GetMapping("get-order-details")
     public ResponseEntity<StandResponse> getAllOrderDetails(){
-
       List<ResponseOrderDetailsDto> allOrdersDetails = placeOrderService.getAllOrdersDetails();
-
         return new ResponseEntity<StandResponse>(
                 new StandResponse(200,"save Order",allOrdersDetails ), HttpStatus.CREATED
         );

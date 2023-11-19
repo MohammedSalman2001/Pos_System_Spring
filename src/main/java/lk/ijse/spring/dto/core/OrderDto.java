@@ -19,9 +19,4 @@ public class OrderDto {
     private Customer customer;
     private List<OrderDetailsDto> orderDetailsDto;
 
-    public OrderDto(String oId, String date, Customer customer) {
-        this.oId = oId;
-        this.date = date;
-        this.customer = customer;
-    }
 }

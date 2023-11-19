@@ -112,7 +112,8 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
 
     public List<OrderDto> findAll() {
         List<Orders> all = placeOrderRepo.findAll();
-        ArrayList<OrderDto> orderDtos = new ArrayList<OrderDto>();
+    return    mapper.map(all,new TypeToken<List<OrderDto>>(){}.getType());
+     /*   ArrayList<OrderDto> orderDtos = new ArrayList<OrderDto>();
 
         List<OrderDetailsDto> orderDetailsDtos=new ArrayList<OrderDetailsDto>();
 
@@ -125,13 +126,12 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
                     orders.getCustomer()
             ));
         }
-        return orderDtos;
+        return orderDtos;*/
 
     }
 
     public List<ResponseOrderDetailsDto> getAllOrdersDetails() {
         List<OrderDetailsInterface> responseOrderDetailsDtos=placeOrderRepo.getAllOrderDetails();
-
      return mapper.map(responseOrderDetailsDtos,new TypeToken<List<ResponseOrderDetailsDto>>(){}.getType());
 
     }
