@@ -30,6 +30,15 @@ public class PlaceOrderController {
         );
     }
 
+    @PutMapping
+    public ResponseEntity<StandResponse> update(@RequestBody OrderDto dto){
+        System.out.println(dto.toString());
+        placeOrderService.updateOrder(dto);
+        return new ResponseEntity<StandResponse>(
+                new StandResponse(200,"update Order",null), HttpStatus.CREATED
+        );
+    }
+
     @GetMapping(path = "{id}")
     public ResponseEntity<StandResponse> find(@PathVariable String id){
         OrderDto orderDto = placeOrderService.find(id);
@@ -57,4 +66,13 @@ public class PlaceOrderController {
                 new StandResponse(200,"save Order",allOrdersDetails ), HttpStatus.CREATED
         );
     }
+
+    @DeleteMapping(params = {"id"})
+    public ResponseEntity<StandResponse> delete(@RequestParam String id){
+        placeOrderService.delete(id);
+        return new ResponseEntity<StandResponse>(
+                new StandResponse(200,"save Order",null ), HttpStatus.CREATED
+        );
+    }
+
 }

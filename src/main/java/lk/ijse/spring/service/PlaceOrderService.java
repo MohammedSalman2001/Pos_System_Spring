@@ -10,11 +10,14 @@ import java.util.List;
 
 public interface PlaceOrderService {
     public OrderDto saveOrder(OrderDto dto);
+    public void updateOrder(OrderDto dto);
 
     public OrderDto find(String id);
 
     public List<OrderDto> findAll();
 
    public List<ResponseOrderDetailsDto> getAllOrdersDetails();
+
+   public void delete(String id);
 
 }

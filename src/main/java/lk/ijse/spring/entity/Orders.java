@@ -17,11 +17,11 @@ public class Orders {
     @Id
     private  String oid;
     private String date;
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "customerId",referencedColumnName = "id",nullable = false)
+    @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "customerID", referencedColumnName = "id", nullable = false)
     private Customer customer;
 
-    @OneToMany(mappedBy = "orders",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
     private List<OrderDetails> orderDetails;
 
 
